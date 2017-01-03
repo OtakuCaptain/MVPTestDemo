@@ -7,7 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chen.mvptestdemo.R;
-import com.chen.mvptestdemo.model.NewsModel;
+import com.chen.mvptestdemo.db.NewsBean;
+import com.chen.mvptestdemo.utils.ImageViewLoaderUtils;
 
 import java.util.List;
 
@@ -20,9 +21,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
     private LayoutInflater mInflater;
     private Context mContext;
-    private List<NewsModel> mData;
+    private List<NewsBean> mData;
 
-    public NewsAdapter(Context context, List<NewsModel> data) {
+    public NewsAdapter(Context context, List<NewsBean> data) {
         mInflater = LayoutInflater.from(context);
         this.mContext = context;
         this.mData = data;
@@ -38,6 +39,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     @Override
     public void onBindViewHolder(NewsViewHolder holder, int position) {
 
+
+        NewsBean newsBean = mData.get(position);
+        holder.mTitle.setText(newsBean.getName());
+        holder.mDescription.setText(newsBean.getDescription());
+        ImageViewLoaderUtils.display(mContext, holder.mImageView, newsBean.getPicsmall());
     }
 
     @Override
