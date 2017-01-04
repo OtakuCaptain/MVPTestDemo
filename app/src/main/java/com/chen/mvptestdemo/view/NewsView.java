@@ -1,7 +1,8 @@
 package com.chen.mvptestdemo.view;
 
-import com.chen.mvptestdemo.db.NewsBean;
+import com.chen.mvptestdemo.model.NewsModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  */
 
 public interface NewsView {
-    void addData(List<NewsBean> mList);
+    void addData(ArrayList<NewsModel> mList);
 
     void showProgress();
 

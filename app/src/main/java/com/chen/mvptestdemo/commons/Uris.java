@@ -6,4 +6,9 @@ package com.chen.mvptestdemo.commons;
 
 public class Uris {
 
+    public static final String SERVER_URL="http://:8080/zhbj";
+    public static final String CATEGORY_URL=SERVER_URL+"/categories.json";
+
+
+
 }

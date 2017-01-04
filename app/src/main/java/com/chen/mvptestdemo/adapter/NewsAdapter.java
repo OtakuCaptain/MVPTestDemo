@@ -7,9 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chen.mvptestdemo.R;
-import com.chen.mvptestdemo.db.NewsBean;
+import com.chen.mvptestdemo.model.NewsModel;
 import com.chen.mvptestdemo.utils.ImageViewLoaderUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,9 +22,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
     private LayoutInflater mInflater;
     private Context mContext;
-    private List<NewsBean> mData;
+    private ArrayList<NewsModel> mData;
 
-    public NewsAdapter(Context context, List<NewsBean> data) {
+    public NewsAdapter(Context context, ArrayList<NewsModel> data) {
         mInflater = LayoutInflater.from(context);
         this.mContext = context;
         this.mData = data;
@@ -40,10 +41,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     public void onBindViewHolder(NewsViewHolder holder, int position) {
 
 
-        NewsBean newsBean = mData.get(position);
-        holder.mTitle.setText(newsBean.getName());
-        holder.mDescription.setText(newsBean.getDescription());
-        ImageViewLoaderUtils.display(mContext, holder.mImageView, newsBean.getPicsmall());
+        NewsModel newsModel = mData.get(position);
+//        holder.mTitle.setText(newsModel.getName());
+//        holder.mDescription.setText(newsModel.getDescription());
+//        ImageViewLoaderUtils.display(mContext, holder.mImageView, newsModel.getPicsmall());
     }
 
     @Override

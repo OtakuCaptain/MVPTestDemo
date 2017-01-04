@@ -1,10 +1,53 @@
 package com.chen.mvptestdemo.model;
 
-/**
- * Created by chen on 2017-01-03.
- */
 
-public interface NewsModel {
-    void loadData(final String url,final int type,final NewsModelImpl.OnLoadNewsDataListener listener);
-    void loadDetilData(String url);
+import java.util.ArrayList;
+
+
+public class NewsModel {
+    public int retcode;
+    public ArrayList<Integer> extend;
+
+    public ArrayList<NewsMenu.NewsMenuData> data;
+
+    @Override
+    public String toString() {
+        return "NewsMenu{" +
+                "data=" + data +
+                '}';
+    }
+
+    //侧边栏菜单
+    public class NewsMenuData {
+        public int id;
+        public String title;
+        public int type;
+
+        public ArrayList<NewsTabData> children;
+
+
+        @Override
+        public String toString() {
+            return "NewsMenuData{" +
+                    "title='" + title + '\'' +
+                    ", children=" + children +
+                    '}';
+        }
+    }
+}
+
+//页签
+class NewsTabData {
+    public int id;
+    public String title;
+    public int type;
+    public String url;
+
+    @Override
+    public String toString() {
+        return "NewsTabData{" +
+                "title='" + title + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }

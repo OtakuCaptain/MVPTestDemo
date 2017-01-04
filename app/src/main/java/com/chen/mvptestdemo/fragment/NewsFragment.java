@@ -12,37 +12,35 @@ import android.view.ViewGroup;
 
 import com.chen.mvptestdemo.R;
 import com.chen.mvptestdemo.adapter.NewsAdapter;
-import com.chen.mvptestdemo.db.NewsBean;
+import com.chen.mvptestdemo.model.NewsModel;
+import com.chen.mvptestdemo.presenter.NewsPresenter;
+import com.chen.mvptestdemo.presenter.NewsPresenterImpl;
 import com.chen.mvptestdemo.view.NewsView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by chen on 2017-01-03.
- */
 public class NewsFragment extends Fragment implements NewsView {
 
     private RecyclerView mRecyclerView;
     private NewsAdapter newsAdapter;
-    private List<NewsBean> mData;
+    private ArrayList<NewsModel> mData;
+    private NewsPresenter newsPresenter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        newsPresenter = new NewsPresenterImpl(this);
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
         View view = inflater.inflate(R.layout.news_fragment, null);
-        initData();
-
         initView(view);
-
         return view;
     }
 
-    private void initData() {
-        mData = new ArrayList<>();
-    }
 
     private void initView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_news);
@@ -56,9 +54,13 @@ public class NewsFragment extends Fragment implements NewsView {
 
 
     @Override
-    public void addData(List<NewsBean> mList) {
-
+    public void addData(ArrayList<NewsModel> mList) {
+        if(null==mData){
+            mData = new ArrayList<>();
+        }
+        mData.addAll(mList);
     }
+
 
     @Override
     public void showProgress() {
