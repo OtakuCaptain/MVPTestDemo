@@ -24,7 +24,7 @@ public class NewsFragment extends Fragment implements NewsView {
 
     private RecyclerView mRecyclerView;
     private NewsAdapter newsAdapter;
-    private ArrayList<NewsModel> mData;
+    private List<NewsModel> mData;
     private NewsPresenter newsPresenter;
 
     @Override
@@ -54,7 +54,7 @@ public class NewsFragment extends Fragment implements NewsView {
 
 
     @Override
-    public void addData(ArrayList<NewsModel> mList) {
+    public void addData(List<NewsModel> mList) {
         if(null==mData){
             mData = new ArrayList<>();
         }

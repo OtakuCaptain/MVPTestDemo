@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public interface NewsView {
-    void addData(ArrayList<NewsModel> mList);
+    void addData(List<NewsModel> mList);
 
     void showProgress();
 
