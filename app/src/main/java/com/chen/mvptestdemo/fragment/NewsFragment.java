@@ -12,19 +12,18 @@ import android.view.ViewGroup;
 
 import com.chen.mvptestdemo.R;
 import com.chen.mvptestdemo.adapter.NewsAdapter;
-import com.chen.mvptestdemo.model.NewsModel;
+import com.chen.mvptestdemo.bean.NewsDetail;
 import com.chen.mvptestdemo.presenter.NewsPresenter;
 import com.chen.mvptestdemo.presenter.NewsPresenterImpl;
 import com.chen.mvptestdemo.view.NewsView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NewsFragment extends Fragment implements NewsView {
 
     private RecyclerView mRecyclerView;
     private NewsAdapter newsAdapter;
-    private List<NewsModel> mData;
+    private ArrayList<NewsDetail> mData;
     private NewsPresenter newsPresenter;
 
     @Override
@@ -54,13 +53,9 @@ public class NewsFragment extends Fragment implements NewsView {
 
 
     @Override
-    public void addData(List<NewsModel> mList) {
-        if(null==mData){
-            mData = new ArrayList<>();
-        }
-        mData.addAll(mList);
-    }
+    public void addData(ArrayList<NewsDetail> mList) {
 
+    }
 
     @Override
     public void showProgress() {

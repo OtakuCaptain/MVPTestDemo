@@ -9,20 +9,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chen.mvptestdemo.R;
-import com.chen.mvptestdemo.model.NewsModel;
+import com.chen.mvptestdemo.bean.NewsDetail;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
-
+    private OnItemClickListener mOnItemClickListener;
     private LayoutInflater mInflater;
     private Context mContext;
-    private List<NewsModel> mData;
+    private ArrayList<NewsDetail> mData;
 
-    public NewsAdapter(Context context, List<NewsModel> data) {
+    public NewsAdapter(Context context, ArrayList<NewsDetail> data) {
         mInflater = LayoutInflater.from(context);
         this.mContext = context;
         this.mData = data;
@@ -37,7 +36,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public void onBindViewHolder(NewsViewHolder holder, int position) {
-        NewsModel newsModel = mData.get(position);
+        NewsDetail newsModel = mData.get(position);
 //        holder.mTitle.setText(newsModel.getName());
 //        holder.mDescription.setText(newsModel.getDescription());
 //        ImageViewLoaderUtils.display(mContext, holder.mImageView, newsModel.getPicsmall());
@@ -61,10 +60,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             mDescription = (TextView) itemView.findViewById(R.id.tv_description);
         }
     }
-    public interface  OnItemClickListener {
-        void onItemClick(View view,int position);
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
     }
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
-//        this.mOnItemClickListener=onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener;
     }
 }

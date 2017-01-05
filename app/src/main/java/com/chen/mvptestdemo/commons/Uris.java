@@ -10,5 +10,7 @@ public class Uris {
     public static final String CATEGORY_URL=SERVER_URL+"/categories.json";
 
 
+    public static final String TOP_URL="http://c.m.163.com/nc/article/headline/T1348647909107/0-20.html";
+
 
 }
