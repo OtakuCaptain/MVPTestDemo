@@ -31,6 +31,7 @@ public class NewsFragment extends Fragment implements NewsView {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         newsPresenter = new NewsPresenterImpl(this);
+        newsPresenter.getData();
     }
 
     @Nullable
@@ -43,12 +44,9 @@ public class NewsFragment extends Fragment implements NewsView {
 
     @Override
     public void addData(List<NewsDetail> mList) {
-
-
         if(null==mData){
             mData = new ArrayList<>();
         }
-        newsPresenter.getData();
         mData.addAll(mList);
         newsAdapter.updateUi(mData);
     }

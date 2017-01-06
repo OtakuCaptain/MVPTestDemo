@@ -46,7 +46,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         NewsDetail newsModel = mData.get(position);
         holder.mTitle.setText(newsModel.getTitle());
         holder.mDescription.setText(newsModel.getDigest());
-//        Glide.with(mContext).load(newsModel.getImgsrc()).into(holder.mImageView);
+        Glide.with(mContext).load(newsModel.getImgsrc()).into(holder.mImageView);
     }
 
     @Override
