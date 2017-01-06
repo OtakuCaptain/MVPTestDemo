@@ -6,6 +6,7 @@ import com.chen.mvptestdemo.model.NewsModelImpl;
 import com.chen.mvptestdemo.view.NewsView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NewsPresenterImpl implements NewsPresenter, NewsModelImpl.OnLoadNewsDataListener {
 
@@ -13,19 +14,19 @@ public class NewsPresenterImpl implements NewsPresenter, NewsModelImpl.OnLoadNew
     private NewsModel newsModel;
 
 
-    public NewsPresenterImpl(NewsView newView) {
+    public NewsPresenterImpl(NewsView newsView) {
         this.newsModel = new NewsModelImpl();
-        this.mNewView = newView;
+        this.mNewView = newsView;
     }
 
 
     @Override
-    public void loadData() {
-        newsModel.loadData(this);
+    public void getData() {
+        newsModel.requestFromServer(this);
     }
 
     @Override
-    public void onSuccess(ArrayList<NewsDetail> list) {
+    public void onSuccess(List<NewsDetail> list) {
         mNewView.hideProgress();
         mNewView.addData(list);
     }

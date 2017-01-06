@@ -5,5 +5,5 @@ package com.chen.mvptestdemo.presenter;
  */
 
 public interface NewsPresenter {
-    void loadData();
+    void getData();
 }

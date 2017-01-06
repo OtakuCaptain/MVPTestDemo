@@ -1,9 +1,20 @@
 package com.chen.mvptestdemo.model;
 
+import com.chen.mvptestdemo.bean.NewsDetail;
+
+import java.util.List;
+
 /**
  * Created by chen on 2017-01-05.
  */
 
 public interface NewsModel {
-    void loadData(final NewsModelImpl.OnLoadNewsDataListener listener);
+
+    interface OnLoadNewsDataListener {
+        void onSuccess(List<NewsDetail> list);
+
+        void onFailure(String str, Exception e);
+    }
+
+    void requestFromServer(OnLoadNewsDataListener listener);
 }

@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chen.mvptestdemo.R;
 import com.chen.mvptestdemo.bean.NewsDetail;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
@@ -21,10 +24,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     private Context mContext;
     private ArrayList<NewsDetail> mData;
 
-    public NewsAdapter(Context context, ArrayList<NewsDetail> data) {
+    public NewsAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
         this.mContext = context;
-        this.mData = data;
+    }
+
+    public void updateUi(ArrayList<NewsDetail> list) {
+        this.mData = list;
+        this.notifyDataSetChanged();
     }
 
     @Override
@@ -37,9 +44,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @Override
     public void onBindViewHolder(NewsViewHolder holder, int position) {
         NewsDetail newsModel = mData.get(position);
-//        holder.mTitle.setText(newsModel.getName());
-//        holder.mDescription.setText(newsModel.getDescription());
-//        ImageViewLoaderUtils.display(mContext, holder.mImageView, newsModel.getPicsmall());
+        holder.mTitle.setText(newsModel.getTitle());
+        holder.mDescription.setText(newsModel.getDigest());
+//        Glide.with(mContext).load(newsModel.getImgsrc()).into(holder.mImageView);
     }
 
     @Override

@@ -18,6 +18,7 @@ import com.chen.mvptestdemo.presenter.NewsPresenterImpl;
 import com.chen.mvptestdemo.view.NewsView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NewsFragment extends Fragment implements NewsView {
 
@@ -40,21 +41,16 @@ public class NewsFragment extends Fragment implements NewsView {
         return view;
     }
 
-
-    private void initView(View view) {
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_news);
-        newsAdapter = new NewsAdapter(getActivity(), mData);
-        mRecyclerView.setAdapter(newsAdapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
-
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-    }
-
-
     @Override
-    public void addData(ArrayList<NewsDetail> mList) {
+    public void addData(List<NewsDetail> mList) {
 
+
+        if(null==mData){
+            mData = new ArrayList<>();
+        }
+        newsPresenter.getData();
+        mData.addAll(mList);
+        newsAdapter.updateUi(mData);
     }
 
     @Override
@@ -70,5 +66,18 @@ public class NewsFragment extends Fragment implements NewsView {
     @Override
     public void showLoadFail() {
 
+    }
+
+    private void initView(View view) {
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_news);
+//        newsPresenter.getData();
+//        newsAdapter.updateUi(mData);
+
+        newsAdapter = new NewsAdapter(getActivity());
+        mRecyclerView.setAdapter(newsAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 }
