@@ -31,7 +31,9 @@ public class NewsFragment extends Fragment implements NewsView {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         newsPresenter = new NewsPresenterImpl(this);
+
         newsPresenter.getData();
+
     }
 
     @Nullable
@@ -68,9 +70,6 @@ public class NewsFragment extends Fragment implements NewsView {
 
     private void initView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_news);
-//        newsPresenter.getData();
-//        newsAdapter.updateUi(mData);
-
         newsAdapter = new NewsAdapter(getActivity());
         mRecyclerView.setAdapter(newsAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
