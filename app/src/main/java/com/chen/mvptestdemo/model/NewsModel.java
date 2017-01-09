@@ -17,6 +17,7 @@ public interface NewsModel {
         void onFailure(String str, Exception e);
     }
 
+
     void requestFromServer(OnLoadNewsDataListener listener);
 
 }

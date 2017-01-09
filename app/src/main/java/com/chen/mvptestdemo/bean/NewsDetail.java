@@ -1,10 +1,12 @@
 package com.chen.mvptestdemo.bean;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by chen_ on 2017-01-06.
  */
 
-public class NewsDetail {
+public class NewsDetail extends DataSupport{
     /**
      * docid
      */

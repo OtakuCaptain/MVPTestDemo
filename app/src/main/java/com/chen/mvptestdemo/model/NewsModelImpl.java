@@ -18,21 +18,19 @@ import okhttp3.Response;
 
 public class NewsModelImpl implements NewsModel {
 
-
     @Override
     public void requestFromServer(final OnLoadNewsDataListener listener) {
         String url = Uris.TOP_URL;
+
         HttpUtil.sendOkHttpRequest(url, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
                 listener.onFailure("获取数据失败", e);
-
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-
                 String responseText = response.body().string();
                 Log.i("新闻", "onResponse: " + responseText);
                 ArrayList<NewsDetail> newsDetails = processData(responseText);
@@ -47,7 +45,6 @@ public class NewsModelImpl implements NewsModel {
 
         Gson gson = new Gson();
         NewsBean newsBean = gson.fromJson(response, NewsBean.class);
-
         return newsBean.data;
 
     }

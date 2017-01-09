@@ -45,41 +45,20 @@ public class NewsFragment extends Fragment implements NewsView, SwipeRefreshLayo
         return view;
     }
 
-    private void initView(View view) {
-        mSwipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
-        mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary,
-                R.color.colorPrimaryDark, R.color.colorAccent,
-                R.color.colorAccent);
-        mSwipeRefreshWidget.setOnRefreshListener(this);
-//        mSwipeRefreshWidget.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                System.out.println("刷新==============");
-//                if (mData != null) {
-//                    mData.clear();
-//                }
-//                newsPresenter.getData();
-//            }
-//        });
-
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_news);
-
-        newsAdapter = new NewsAdapter(getActivity());
-        mRecyclerView.setAdapter(newsAdapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-    }
-
     @Override
-    public void addData(ArrayList<NewsDetail> mList) {
+    public void addData(List<NewsDetail> mList) {
         if (null == mData) {
             mData = new ArrayList<>();
         }
         mData.addAll(mList);
-        Log.i("tag", "showImage: " + String.valueOf(mList));
-        Log.i("tag", "showImage: " + String.valueOf(mData));
+//        Log.i("tag", "showImage: " + String.valueOf(mList));
+//        Log.i("tag", "showImage: " + String.valueOf(mData));
+
         newsAdapter.addData(mData);
+
+        int itemCount = newsAdapter.getItemCount();
+        Log.i("count", "initView: "+itemCount);
+        Log.i("count", "initView: "+mList);
     }
 
     @Override
@@ -97,6 +76,20 @@ public class NewsFragment extends Fragment implements NewsView, SwipeRefreshLayo
 
     }
 
+    private void initView(View view) {
+        mSwipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
+        mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary,
+                R.color.colorPrimaryDark, R.color.colorAccent,
+                R.color.colorAccent);
+        mSwipeRefreshWidget.setOnRefreshListener(this);
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_news);
+        newsAdapter = new NewsAdapter(getActivity());
+        mRecyclerView.setAdapter(newsAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+    }
 
     @Override
     public void onRefresh() {

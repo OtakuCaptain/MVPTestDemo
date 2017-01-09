@@ -23,14 +23,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     private OnItemClickListener mOnItemClickListener;
     private LayoutInflater mInflater;
     private Context mContext;
-    private ArrayList<NewsDetail> mData;
+    private List<NewsDetail> mData;
 
     public NewsAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
         this.mContext = context;
     }
 
-    public void addData(ArrayList<NewsDetail> list) {
+    public void addData(List<NewsDetail> list) {
         this.mData = list;
 //        this.notifyDataSetChanged();
     }
@@ -52,8 +52,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public int getItemCount() {
-        Log.i("tag", "getItemCount: " + mData.size());
-        return mData.size();
+//                Log.i("tag", "getItemCount: " + mData.size());
+
+        return mData==null?0:mData.size();
     }
 
     class NewsViewHolder extends RecyclerView.ViewHolder {

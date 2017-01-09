@@ -17,12 +17,10 @@ public class NewsPresenterImpl implements NewsPresenter, NewsModelImpl.OnLoadNew
     private NewsView mNewView;
     private NewsModel newsModel;
 
-
     public NewsPresenterImpl(NewsView newsView) {
         this.newsModel = new NewsModelImpl();
         this.mNewView = newsView;
     }
-
 
     @Override
     public void getData() {
@@ -34,7 +32,6 @@ public class NewsPresenterImpl implements NewsPresenter, NewsModelImpl.OnLoadNew
     @Override
     public void onSuccess(ArrayList<NewsDetail> list) {
         if (null != list) {
-
             mNewView.addData(list);
             mNewView.hideProgress();
         }
