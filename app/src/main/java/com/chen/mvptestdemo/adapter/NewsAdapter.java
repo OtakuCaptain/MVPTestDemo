@@ -2,6 +2,7 @@ package com.chen.mvptestdemo.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +30,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         this.mContext = context;
     }
 
-    public void updateUi(ArrayList<NewsDetail> list) {
+    public void addData(ArrayList<NewsDetail> list) {
         this.mData = list;
-        this.notifyDataSetChanged();
+//        this.notifyDataSetChanged();
     }
 
     @Override
@@ -51,6 +52,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public int getItemCount() {
+        Log.i("tag", "getItemCount: " + mData.size());
         return mData.size();
     }
 

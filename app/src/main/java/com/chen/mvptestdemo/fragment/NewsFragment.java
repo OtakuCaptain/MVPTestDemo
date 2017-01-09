@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,44 +38,58 @@ public class NewsFragment extends Fragment implements NewsView, SwipeRefreshLayo
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.news_fragment, null);
         initView(view);
         onRefresh();
         return view;
     }
+
     private void initView(View view) {
-        mSwipeRefreshWidget= (SwipeRefreshLayout) view.findViewById(R.id.refresh);
+        mSwipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
         mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary,
                 R.color.colorPrimaryDark, R.color.colorAccent,
                 R.color.colorAccent);
         mSwipeRefreshWidget.setOnRefreshListener(this);
+//        mSwipeRefreshWidget.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                System.out.println("刷新==============");
+//                if (mData != null) {
+//                    mData.clear();
+//                }
+//                newsPresenter.getData();
+//            }
+//        });
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_news);
+
         newsAdapter = new NewsAdapter(getActivity());
         mRecyclerView.setAdapter(newsAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
     @Override
-    public void addData(List<NewsDetail> mList) {
-        if(null==mData){
+    public void addData(ArrayList<NewsDetail> mList) {
+        if (null == mData) {
             mData = new ArrayList<>();
         }
         mData.addAll(mList);
-        newsAdapter.updateUi(mData);
+        Log.i("tag", "showImage: " + String.valueOf(mList));
+        Log.i("tag", "showImage: " + String.valueOf(mData));
+        newsAdapter.addData(mData);
     }
 
     @Override
     public void showProgress() {
-        mSwipeRefreshWidget.setRefreshing(true);
+//        mSwipeRefreshWidget.setRefreshing(true);
     }
 
     @Override
     public void hideProgress() {
-        mSwipeRefreshWidget.setRefreshing(false);
+//        mSwipeRefreshWidget.setRefreshing(false);
     }
 
     @Override
@@ -83,11 +98,10 @@ public class NewsFragment extends Fragment implements NewsView, SwipeRefreshLayo
     }
 
 
-
     @Override
     public void onRefresh() {
         System.out.println("刷新==============");
-        if(mData!=null){
+        if (mData != null) {
             mData.clear();
         }
         newsPresenter.getData();

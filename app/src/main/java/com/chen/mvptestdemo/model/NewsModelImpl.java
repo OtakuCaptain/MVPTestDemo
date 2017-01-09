@@ -27,25 +27,27 @@ public class NewsModelImpl implements NewsModel {
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
                 listener.onFailure("获取数据失败", e);
+
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 
                 String responseText = response.body().string();
-                Log.i("新闻", "onResponse: "+responseText);
+                Log.i("新闻", "onResponse: " + responseText);
                 ArrayList<NewsDetail> newsDetails = processData(responseText);
+                Log.i("新闻", "解析结果: " + String.valueOf(newsDetails));
                 listener.onSuccess(newsDetails);
             }
         });
     }
 
 
-    public ArrayList<NewsDetail> processData(String response) {
+    private ArrayList<NewsDetail> processData(String response) {
 
         Gson gson = new Gson();
         NewsBean newsBean = gson.fromJson(response, NewsBean.class);
-        Log.i("新闻", "解析结果: "+ String.valueOf(newsBean));
+
         return newsBean.data;
 
     }

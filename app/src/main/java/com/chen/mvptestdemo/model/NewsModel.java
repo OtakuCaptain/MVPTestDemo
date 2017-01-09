@@ -2,6 +2,7 @@ package com.chen.mvptestdemo.model;
 
 import com.chen.mvptestdemo.bean.NewsDetail;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,10 +12,11 @@ import java.util.List;
 public interface NewsModel {
 
     interface OnLoadNewsDataListener {
-        void onSuccess(List<NewsDetail> list);
+        void onSuccess(ArrayList<NewsDetail> list);
 
         void onFailure(String str, Exception e);
     }
 
     void requestFromServer(OnLoadNewsDataListener listener);
+
 }
